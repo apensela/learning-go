@@ -74,17 +74,13 @@ func updateMovie(w http.ResponseWriter,r *http.Request)  {
 	for  index, item := range movies {
 		if item.ID == params["id"]{
 			movies = append(movies[:index], movies[index+1:]...)
-			// _ = json.NewDecoder(r.Body).Decode(&newMovie)
-			// newMovie.ID = params["id"]
-			// movies = append(movies, newMovie)
-			// json.NewEncoder(w).Encode(newMovie)
+			_ = json.NewDecoder(r.Body).Decode(&newMovie)
+			newMovie.ID = params["id"]
+			movies = append(movies, newMovie)
+			json.NewEncoder(w).Encode(newMovie)
 			break
 		}
 	}
-	_ = json.NewDecoder(r.Body).Decode(&newMovie)
-	newMovie.ID = params["id"]
-	movies = append(movies, newMovie)
-	json.NewEncoder(w).Encode(newMovie)
 
 }
 
